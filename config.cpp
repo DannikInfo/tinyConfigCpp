@@ -13,7 +13,6 @@ void config::loadConfig(){
     if(std::filesystem::exists(configName+".json")){
         std::ifstream i(configName+".json");
         i >> preJ;
-
         //Check new paths in defaults
         bool found = false;
         if(!j.empty()) {
@@ -28,6 +27,7 @@ void config::loadConfig(){
                 saveConfig();
             }
         }
+        i.close();
     }else
         saveConfig();
     loaded = true;
@@ -36,4 +36,5 @@ void config::loadConfig(){
 void config::saveConfig(){
     std::ofstream o(configName+".json");
     o << std::setw(4) << j << std::endl;
+    o.close();
 }
